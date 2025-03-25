@@ -17,5 +17,13 @@
       "indent": ["error", 2],
       "quotes": ["error", "single"],
       "semi": ["error", "always"]
+    },
+    "overrides": [
+    {
+      "files": ["*.js"], // Apply this override to all .js files
+      "env": {
+        "node": true // Enable Node.js environment for .js files
+      }
     }
+  ]
   }

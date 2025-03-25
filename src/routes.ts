@@ -1,19 +1,18 @@
-import express from "express";
+import express from 'express';
 import {
   getAllTodos,
   createTodo,
   updateTodoById,
   deleteTodoById,
-} from "./todoService";
+} from './todoService';
 
 const router = express.Router();
 
-router.get("/todos", (req, res) => {
-    console.log("first")
+router.get('/todos', (req, res) => {
   res.json(getAllTodos());
 });
 
-router.post("/todos", (req, res) => {
+router.post('/todos', (req, res) => {
   try {
     const { text } = req.body;
     const todo = createTodo(text);
@@ -23,7 +22,7 @@ router.post("/todos", (req, res) => {
   }
 });
 
-router.put("/todos/:id", (req, res) => {
+router.put('/todos/:id', (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const { text, completed } = req.body;
@@ -34,7 +33,7 @@ router.put("/todos/:id", (req, res) => {
   }
 });
 
-router.delete("/todos/:id", (req, res) => {
+router.delete('/todos/:id', (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     deleteTodoById(id);
