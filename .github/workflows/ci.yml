@@ -1,42 +1,52 @@
-name: CI
+# This GitHub Actions workflow file defines a Continuous Integration (CI) pipeline
+# for the task-manager project. It is triggered on pushes and pull requests to the main branch.
+
+name: CI # The name of the workflow displayed in the GitHub Actions UI.
 
 on:
   push:
     branches:
-      - main
+      - main # Trigger the workflow on pushes to the main branch.
   pull_request:
     branches:
-      - main
+      - main # Trigger the workflow on pull requests targeting the main branch.
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build: # Defines the build job for the CI pipeline.
+    runs-on: ubuntu-latest # Specifies the runner environment as the latest Ubuntu version.
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        # Checks out the repository code to the runner.
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18' # Sets up Node.js version 18 for the environment.
 
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ~/.npm # Specifies the path to cache Node.js dependencies.
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # Generates a unique cache key based on the OS and package-lock.json hash.
           restore-keys: |
             ${{ runner.os }}-node-
+            # Fallback keys to restore cache if an exact match is not found.
 
       - name: Install dependencies
         run: npm ci
+        # Installs project dependencies using npm in a clean environment.
 
       - name: Run linting
         run: npm run lint
+        # Runs the linting script to check for code style and formatting issues.
 
       - name: Run type checks
         run: npm run type-check
+        # Executes the type-checking script to validate TypeScript types.
 
       - name: Run tests
         run: npm test
+        # Runs the test suite to ensure the code behaves as expected.
