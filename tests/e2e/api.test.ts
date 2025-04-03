@@ -26,6 +26,16 @@ describe('Todo API E2E Tests', () => {
       .post('/api/todos')
       .send({ text: 'Todo' });
     const id = createRes.body.id;
+    /**
+     * Sends a PUT request to update a specific todo item by its ID.
+     *
+     * @constant {Response} updateRes - The response object returned from the API request.
+     * @param {string} id - The unique identifier of the todo item to be updated.
+     * @param {Object} payload - The data to update the todo item with.
+     * @param {string} payload.text - The updated text for the todo item.
+     * @param {boolean} payload.completed - The updated completion status of the todo item.
+     * @returns {Promise<Response>} The response from the server after attempting to update the todo item.
+     */
     const updateRes = await request(app)
       .put(`/api/todos/${id}`)
       .send({ text: 'Updated Todo', completed: true });
