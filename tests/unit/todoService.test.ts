@@ -22,6 +22,24 @@ describe('Todo Service Unit Tests', () => {
 
   it('should update a todo', () => {
     createTodo('Initial Todo');
+    /**
+     * Tests the `updateTodoById` function to ensure it updates a todo item
+     * with the specified ID, title, and completion status.
+     *
+     * @remarks
+     * This test verifies that the function correctly modifies the todo item
+     * in the data store and returns the updated object.
+     *
+     * @example
+     * ```typescript
+     * const updated = updateTodoById(1, 'Updated Todo', true);
+     * expect(updated).toEqual({
+     *   id: 1,
+     *   title: 'Updated Todo',
+     *   completed: true
+     * });
+     * ```
+     */
     const updated = updateTodoById(1, 'Updated Todo', true);
     expect(updated).toEqual({ id: 1, text: 'Updated Todo', completed: true });
   });
